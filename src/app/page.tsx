@@ -5,7 +5,7 @@ import { fetchFuelData } from "../lib/fuel";
 import { fetchForecastData } from "../lib/mlPrediction";
 import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
-import { TABS, CARDS, TabType } from "./constants"; 
+import { TabType } from "./constants"; 
 
 export default function Home() {
   const [tab, setTab] = useState<TabType>("level");

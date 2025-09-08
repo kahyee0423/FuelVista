@@ -9,8 +9,7 @@ interface ForecastContentProps {
 }
 
 export default function ForecastContent({ forecast, latest }: ForecastContentProps) {
-  const [fuelType, setFuelType] = useState("ron95");
-  const [region, setRegion] = useState("all");
+  const [fuelType] = useState("ron95");
 
   const currentPrice = latest?.[fuelType] ?? 0;
   const prices = forecast.map((f) => f[fuelType]);

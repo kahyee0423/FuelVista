@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import axios from "axios";
 
 interface Alert {
   fuel: string;
