@@ -44,7 +44,7 @@ jobs:
       - name: Send Notifications via Firebase
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          TELEGRAM_API_URL: "https://<your-deployment-domain>/api/telegram-alert"
+          TELEGRAM_API_URL: "https://fuelvista.vercel.app/api/telegram-alert"
           RON95: ${{ env.RON95 }}
           RON97: ${{ env.RON97 }}
           DIESEL: ${{ env.DIESEL }}
