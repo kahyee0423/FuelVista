@@ -1,0 +1,53 @@
+name: Daily Fuel Update
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  fetch-predict-and-notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas fastparquet requests firebase-admin jq
+
+      - name: Run ML Prediction
+        run: |
+          python ml_scripts/predict_fuel.py  # Ensure script writes JSON directly
+          cat predicted_prices.json  # Debug: verify output
+
+      - name: Set predicted prices as environment variables
+        run: |
+          RON95=$(jq -r '.ron95' predicted_prices.json)
+          RON97=$(jq -r '.ron97' predicted_prices.json)
+          DIESEL=$(jq -r '.diesel' predicted_prices.json)
+          echo "RON95=$RON95" >> $GITHUB_ENV
+          echo "RON97=$RON97" >> $GITHUB_ENV
+          echo "DIESEL=$DIESEL" >> $GITHUB_ENV
+
+      - name: Debug environment variables
+        run: |
+          echo "RON95=$RON95"
+          echo "RON97=$RON97"
+          echo "DIESEL=$DIESEL"
+
+      - name: Send Notifications via Firebase
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          TELEGRAM_API_URL: "https://<your-deployment-domain>/api/telegram-alert"
+          RON95: ${{ env.RON95 }}
+          RON97: ${{ env.RON97 }}
+          DIESEL: ${{ env.DIESEL }}
+        run: |
+          echo "$FIREBASE_SERVICE_ACCOUNT" > service_account.json
+          python ml_scripts/send_alerts.py
