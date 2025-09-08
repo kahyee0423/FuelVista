@@ -36,16 +36,13 @@ def predict_next_weeks(df, weeks=4):
     return forecast
 
 if __name__ == "__main__":
-    # Load Firebase service account
     cred = credentials.Certificate("../src/lib/service_account.json")
     firebase_admin.initialize_app(cred)
     db = firestore.client()
 
-    # Generate forecast
     df = fetch_data()
     forecast = predict_next_weeks(df, weeks=4)
 
-    # Save into Firestore
     db.collection("forecasts").document("latest").set({"data": forecast})
 
     print("Forecast uploaded to Firestore successfully!")
