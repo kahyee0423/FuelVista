@@ -3,6 +3,8 @@ import json
 from datetime import timedelta
 from sklearn.linear_model import LinearRegression
 import numpy as np
+import firebase_admin
+from firebase_admin import credentials, firestore
 
 URL_DATA = "https://storage.data.gov.my/commodities/fuelprice.parquet"
 
@@ -34,6 +36,16 @@ def predict_next_weeks(df, weeks=4):
     return forecast
 
 if __name__ == "__main__":
+    # Load Firebase service account
+    cred = credentials.Certificate("../src/lib/service_account.json")
+    firebase_admin.initialize_app(cred)
+    db = firestore.client()
+
+    # Generate forecast
     df = fetch_data()
     forecast = predict_next_weeks(df, weeks=4)
-    print(json.dumps(forecast))  
+
+    # Save into Firestore
+    db.collection("forecasts").document("latest").set({"data": forecast})
+
+    print("Forecast uploaded to Firestore successfully!")
