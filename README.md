@@ -22,24 +22,24 @@
 Explore the intuitive and visually engaging interface of FuelVista. Each module is designed for clarity, interactivity, and seamless navigation, showcasing real-time insights and predictive analytics:
 
 ### Price Tab
-![Price Tab](Price_tab.png "FuelVista Price Tab")
 View the latest RON95, RON97, and Diesel prices across Malaysia with a clean and responsive layout.
+![Price Tab](Price_tab.png "FuelVista Price Tab")
 
 ### Weekly Changes
-![Weekly Changes](weekly_changes.png "FuelVista Weekly Changes Tab")
 Track weekly price fluctuations with interactive charts for quick, actionable insights.
+![Weekly Changes](weekly_changes.png "FuelVista Weekly Changes Tab")
 
 ### Price Forecast
-![Price Forecast](price_forecast.png "FuelVista Price Forecast Tab")
 Leverage AI-powered predictions to anticipate fuel price changes and plan efficiently.
+![Price Forecast](price_forecast.png "FuelVista Price Forecast Tab")
 
 ### Fuel Calculator
-![Fuel Calculator](fuel_calc.png "FuelVista Fuel Calculator Tab")
 Estimate travel costs with a sophisticated yet user-friendly calculator tailored to your vehicle and distance.
+![Fuel Calculator](fuel_calc.png "FuelVista Fuel Calculator Tab")
 
 ### Alert Subscription
-![Alert Subscription](alert.png "FuelVista Alert Subscription Tab")
 Receive real-time notifications via Telegram, ensuring you never miss price changes that matter to you.
+![Alert Subscription](alert.png "FuelVista Alert Subscription Tab")
 
 ---
 
