@@ -34,6 +34,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
     print(f"[REGISTER] User: {username}, chat_id: {chat_id}")
 
+    prices = await fetch_latest_fuel_prices()
+    if prices:
+        doc = db.collection(SUBSCRIPTIONS_COLLECTION).document(username).get()
+        data = doc.to_dict()
+        alerts = data.get("alerts", [])
+        if alerts:
+            await check_and_send_alerts(prices, username, chat_id, alerts)
 
 async def list_subs(update: Update, context: ContextTypes.DEFAULT_TYPE):
     subs = db.collection(SUBSCRIPTIONS_COLLECTION).stream()
