@@ -17,7 +17,7 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 SUBSCRIPTIONS_COLLECTION = "subscriptions"
-FUEL_API_URL = "https://fuelvista.vercel.app/api/fuel"
+FUEL_API_URL = "http://localhost:3000/api/fuel"
 last_alerts = {}
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
